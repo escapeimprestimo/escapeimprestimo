@@ -2,239 +2,564 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Escape Empréstimo</title>
-
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #080808;
-  color: white;
-}
-
-header {
-  background: linear-gradient(135deg, #050505, #202020);
-  text-align: center;
-  padding: 30px 20px;
-  border-bottom: 2px solid #ffd400;
-}
-
-.logo {
-  font-size: 34px;
-  font-weight: 900;
-  color: #ffd400;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.subtitulo {
-  margin-top: 8px;
-  color: #ffffff;
-  font-size: 16px;
-}
-
-main {
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
-}
-
-.card {
-  background: #171717;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 0 25px rgba(255, 212, 0, 0.12);
-}
-
-h2 {
-  color: #ffd400;
-  margin-top: 0;
-}
-
-p {
-  color: #cccccc;
-  line-height: 1.5;
-}
-
-label {
-  display: block;
-  margin-top: 16px;
-  margin-bottom: 7px;
-  font-weight: bold;
-}
-
-input,
-textarea,
-select {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #444;
-  border-radius: 10px;
-  background: #0d0d0d;
-  color: white;
-  font-size: 16px;
-}
-
-textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-button {
-  width: 100%;
-  padding: 16px;
-  margin-top: 22px;
-  border: 0;
-  border-radius: 10px;
-  background: #ffd400;
-  color: #000;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #ffe45c;
-}
-
-#confirmacao {
-  display: none;
-  margin-top: 20px;
-  padding: 18px;
-  border-radius: 12px;
-  background: #123b1d;
-  color: #65e879;
-  text-align: center;
-  font-weight: bold;
-}
-
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #777;
-  font-size: 14px;
-}
-
-.aviso {
-  color: #aaa;
-  font-size: 13px;
-  margin-top: 15px;
-}
+*{box-sizing:border-box}
+body{margin:0;background:#07100d;color:#fff;font-family:Arial,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{max-width:480px;margin:auto;min-height:100vh;background:#0b1512}
+header{padding:22px 18px;background:linear-gradient(135deg,#07100d,#123d2d);border-bottom:2px solid #f4c400;position:sticky;top:0;z-index:5}
+.logo{font-size:27px;font-weight:900;color:#ffd000}
+.sub{color:#aebbb5;margin-top:4px}
+main{padding:16px 14px 90px}
+.card{background:#13201b;border:1px solid #294238;border-radius:18px;padding:16px;margin-bottom:14px}
+h2,h3{margin:0 0 12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.metric{background:#101b17;border-radius:15px;padding:15px}
+.metric b{display:block;font-size:21px;color:#ffd000;margin-top:5px}
+.btn{border:0;border-radius:13px;padding:13px 16px;font-weight:800}
+.gold{background:#ffd000;color:#151515}
+.green{background:#176b49;color:#fff}
+.dark{background:#20322b;color:#fff}
+.red{background:#8b2929;color:#fff}
+.full{width:100%}
+input,select,textarea{width:100%;padding:14px;background:#08100e;color:#fff;border:1px solid #385147;border-radius:12px;margin:6px 0 13px}
+label{font-weight:700;color:#dce4df}
+.row{display:flex;gap:8px;align-items:center}
+.row>*{flex:1}
+.nav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:auto;background:#101c18;border-top:1px solid #30463d;display:grid;grid-template-columns:repeat(5,1fr);z-index:10}
+.nav button{background:none;border:0;color:#9eaaa5;padding:11px 2px;font-size:11px}
+.nav button.active{color:#ffd000}
+.nav span{display:block;font-size:20px;margin-bottom:3px}
+.page{display:none}
+.page.active{display:block}
+.badge{display:inline-block;padding:5px 9px;border-radius:20px;background:#214b39;color:#ffd000;font-size:12px;font-weight:bold}
+.search{margin-bottom:10px}
+.chips{display:flex;gap:7px;overflow:auto;margin-bottom:12px}
+.chip{white-space:nowrap;background:#17251f;color:#b9c5c0;border:1px solid #30453c;border-radius:20px;padding:8px 12px}
+.chip.active{background:#ffd000;color:#111}
+.client{display:flex;justify-content:space-between;gap:10px}
+.client strong{font-size:17px}
+.small{font-size:12px;color:#aab7b1;margin-top:5px}
+.list{margin-top:10px}
+.empty{text-align:center;color:#89958f;padding:25px}
+.login{min-height:100vh;display:flex;align-items:center;padding:20px;background:radial-gradient(circle at top,#174f38,#07100d 55%)}
+.loginbox{width:100%;background:#102019;border:1px solid #315044;border-radius:22px;padding:22px}
+.loginbox h1{color:#ffd000;margin-top:0}
+.toprow{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.hidden{display:none!important}
+.notice{padding:12px;border-radius:12px;background:#183c2e;color:#cde8dc;margin-bottom:12px}
+.total{font-size:30px;font-weight:900;color:#ffd000}
+hr{border:0;border-top:1px solid #294138;margin:15px 0}
 </style>
 </head>
 
 <body>
 
+<div id="login" class="login">
+  <div class="loginbox">
+    <h1>ESCAPE EMPRÉSTIMO</h1>
+    <p>Área exclusiva do proprietário</p>
+    <label>Usuário</label>
+    <input id="loginUser" placeholder="Digite seu usuário">
+    <label>Senha</label>
+    <input id="loginPass" type="password" placeholder="Digite sua senha">
+    <button class="btn gold full" onclick="entrar()">ENTRAR</button>
+    <p class="small">Primeiro acesso: escolha seu usuário e senha. Esta versão é uma demonstração local.</p>
+  </div>
+</div>
+
+<div id="app" class="app hidden">
+
 <header>
-  <div class="logo">Escape Empréstimo</div>
-  <div class="subtitulo">Cadastro de Cliente</div>
+  <div class="toprow">
+    <div>
+      <div class="logo">ESCAPE EMPRÉSTIMO</div>
+      <div class="sub" id="headerSub">Painel administrativo</div>
+    </div>
+    <button class="btn dark" onclick="sair()">Sair</button>
+  </div>
 </header>
 
 <main>
-  <div class="card">
 
-    <h2>Cadastro de Cliente</h2>
+<!-- INÍCIO -->
+<section id="inicio" class="page active">
+  <h2>Início</h2>
 
-    <p>
-      Preencha seus dados abaixo para enviar uma solicitação de atendimento.
-    </p>
-
-    <form id="cadastro">
-
-      <label for="nome">Nome completo</label>
-      <input
-        type="text"
-        id="nome"
-        name="nome"
-        placeholder="Digite seu nome completo"
-        required
-      >
-
-      <label for="telefone">Telefone</label>
-      <input
-        type="tel"
-        id="telefone"
-        name="telefone"
-        placeholder="Digite seu telefone"
-        required
-      >
-
-      <label for="cpf">CPF</label>
-      <input
-        type="text"
-        id="cpf"
-        name="cpf"
-        placeholder="Digite seu CPF"
-        required
-      >
-
-      <label for="valor">Valor desejado</label>
-      <input
-        type="number"
-        id="valor"
-        name="valor"
-        placeholder="Digite o valor"
-        min="0"
-        step="0.01"
-        required
-      >
-
-      <label for="tipo">Tipo de atendimento</label>
-      <select id="tipo" name="tipo" required>
-        <option value="">Selecione uma opção</option>
-        <option value="Empréstimo">Empréstimo</option>
-        <option value="Renegociação">Renegociação</option>
-        <option value="Informações">Informações</option>
-        <option value="Outro">Outro</option>
-      </select>
-
-      <label for="mensagem">Observações</label>
-      <textarea
-        id="mensagem"
-        name="mensagem"
-        placeholder="Digite alguma informação adicional"
-      ></textarea>
-
-      <button type="submit">
-        ENVIAR CADASTRO
-      </button>
-
-      <div id="confirmacao">
-        Cadastro preenchido com sucesso!
-        <br>
-        Em breve entraremos em contato.
-      </div>
-
-      <div class="aviso">
-        Seus dados devem ser preenchidos corretamente para facilitar o atendimento.
-      </div>
-
-    </form>
-
+  <div class="grid">
+    <div class="metric">Capital emprestado<b id="capital">R$ 0,00</b></div>
+    <div class="metric">A receber<b id="receber">R$ 0,00</b></div>
+    <div class="metric">Juros recebidos<b id="juros">R$ 0,00</b></div>
+    <div class="metric">Em atraso<b id="atraso">R$ 0,00</b></div>
   </div>
+
+  <div class="card">
+    <h3>Atalhos</h3>
+    <div class="grid">
+      <button class="btn gold" onclick="abrir('clientes');novoCliente()">+ Cliente</button>
+      <button class="btn green" onclick="abrir('contratos')">+ Contrato</button>
+      <button class="btn dark" onclick="abrir('cobranca')">Cobrança</button>
+      <button class="btn dark" onclick="abrir('financeiro')">Financeiro</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Próximas cobranças</h3>
+    <div id="proximas"></div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section id="clientes" class="page">
+  <div class="toprow">
+    <div>
+      <h2>Clientes</h2>
+      <span class="badge" id="contClientes">0 clientes</span>
+    </div>
+    <button class="btn gold" onclick="novoCliente()">+ Novo</button>
+  </div>
+
+  <button class="btn green full" onclick="abrirCadastroPublico()">🔗 Cadastro por link</button>
+
+  <input class="search" id="busca" placeholder="Pesquisar nome, telefone ou CPF" oninput="renderClientes()">
+
+  <div class="chips">
+    <button class="chip active" onclick="filtro='todos';renderClientes()">Todos</button>
+    <button class="chip" onclick="filtro='ativos';renderClientes()">Ativos</button>
+    <button class="chip" onclick="filtro='atraso';renderClientes()">Em atraso</button>
+    <button class="chip" onclick="filtro='pendentes';renderClientes()">Aguardando</button>
+  </div>
+
+  <div id="listaClientes"></div>
+</section>
+
+<!-- CONTRATOS -->
+<section id="contratos" class="page">
+  <div class="toprow">
+    <h2>Novo contrato</h2>
+    <button class="btn dark" onclick="limparContrato()">Limpar</button>
+  </div>
+
+  <div class="card">
+    <label>Cliente</label>
+    <select id="cCliente"></select>
+
+    <label>Valor emprestado</label>
+    <input id="cValor" type="number" step="0.01" placeholder="1000">
+
+    <label>Juros (%)</label>
+    <input id="cJuros" type="number" step="0.01" value="10" oninput="calcularContrato()">
+
+    <div class="notice">
+      Juros em R$: <b id="cJurosReais">R$ 0,00</b><br>
+      Total a receber: <b id="cTotal">R$ 0,00</b>
+    </div>
+
+    <label>Forma de pagamento</label>
+    <select id="cForma">
+      <option>Parcela completa — principal + juros</option>
+      <option>Somente juros — principal permanece em aberto</option>
+    </select>
+
+    <label>Periodicidade</label>
+    <select id="cPeriodo">
+      <option>Mensal</option>
+      <option>Quinzenal</option>
+      <option>Semanal</option>
+    </select>
+
+    <label>Número de parcelas</label>
+    <input id="cParcelas" type="number" value="1" min="1">
+
+    <label>Primeiro vencimento</label>
+    <input id="cVencimento" type="date">
+
+    <label>Juros por atraso (%)</label>
+    <input id="cAtraso" type="number" value="2" step="0.01">
+
+    <button class="btn gold full" onclick="criarContrato()">CRIAR CONTRATO</button>
+  </div>
+
+  <div class="card">
+    <h3>Contratos existentes</h3>
+    <div id="listaContratos"></div>
+  </div>
+</section>
+
+<!-- COBRANÇA -->
+<section id="cobranca" class="page">
+  <h2>Cobrança</h2>
+
+  <div class="grid">
+    <div class="metric">Em aberto<b id="cobAberto">R$ 0,00</b></div>
+    <div class="metric">Atrasado<b id="cobAtrasado">R$ 0,00</b></div>
+  </div>
+
+  <div class="card">
+    <h3>Parcelas</h3>
+    <div id="listaParcelas"></div>
+  </div>
+</section>
+
+<!-- FINANCEIRO -->
+<section id="financeiro" class="page">
+  <h2>Financeiro</h2>
+
+  <div class="card">
+    <div class="small">Saldo calculado</div>
+    <div class="total" id="saldo">R$ 0,00</div>
+  </div>
+
+  <div class="grid">
+    <div class="metric">Entradas<b id="entradas">R$ 0,00</b></div>
+    <div class="metric">Saídas<b id="saidas">R$ 0,00</b></div>
+  </div>
+
+  <div class="card">
+    <h3>Nova movimentação</h3>
+    <select id="movTipo">
+      <option>Entrada</option>
+      <option>Saída</option>
+    </select>
+    <input id="movValor" type="number" step="0.01" placeholder="Valor">
+    <input id="movDesc" placeholder="Descrição">
+    <button class="btn gold full" onclick="movimentar()">REGISTRAR</button>
+  </div>
+
+  <div class="card">
+    <h3>Histórico</h3>
+    <div id="historico"></div>
+  </div>
+</section>
+
 </main>
 
-<footer>
-  © 2026 Escape Empréstimo — Todos os direitos reservados.
-</footer>
+<nav class="nav">
+  <button class="active" onclick="abrir('inicio',this)"><span>⌂</span>Início</button>
+  <button onclick="abrir('cobranca',this)"><span>💰</span>Cobrança</button>
+  <button onclick="abrir('contratos',this)"><span>📋</span>Contratos</button>
+  <button onclick="abrir('financeiro',this)"><span>📊</span>Financeiro</button>
+  <button onclick="abrir('clientes',this)"><span>👥</span>Clientes</button>
+</nav>
+
+</div>
 
 <script>
-document.getElementById("cadastro").addEventListener("submit", function(event) {
-  event.preventDefault();
+let clientes=JSON.parse(localStorage.getItem('clientes')||'[]');
+let contratos=JSON.parse(localStorage.getItem('contratos')||'[]');
+let movimentos=JSON.parse(localStorage.getItem('movimentos')||'[]');
+let filtro='todos';
 
-  document.getElementById("confirmacao").style.display = "block";
+const brl=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 
-  window.scrollTo({
-    top: document.getElementById("confirmacao").offsetTop - 30,
-    behavior: "smooth"
+function save(){
+ localStorage.setItem('clientes',JSON.stringify(clientes));
+ localStorage.setItem('contratos',JSON.stringify(contratos));
+ localStorage.setItem('movimentos',JSON.stringify(movimentos));
+ atualizar();
+}
+
+function entrar(){
+ const u=document.getElementById('loginUser').value.trim();
+ const p=document.getElementById('loginPass').value;
+ if(!u||!p){alert('Digite usuário e senha.');return}
+ localStorage.setItem('ownerUser',u);
+ localStorage.setItem('ownerPass',p);
+ document.getElementById('login').classList.add('hidden');
+ document.getElementById('app').classList.remove('hidden');
+ atualizar();
+}
+
+function sair(){
+ document.getElementById('app').classList.add('hidden');
+ document.getElementById('login').classList.remove('hidden');
+}
+
+function abrir(id,btn){
+ document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+ if(btn)btn.classList.add('active');
+ atualizar();
+}
+
+function novoCliente(){
+ abrir('clientes');
+ setTimeout(()=>{
+  const nome=prompt('Nome completo do cliente:');
+  if(!nome)return;
+  const telefone=prompt('Telefone/WhatsApp:')||'';
+  const cpf=prompt('CPF:')||'';
+  clientes.push({
+   id:Date.now(),nome,telefone,cpf,status:'Ativo',criado:new Date().toLocaleDateString('pt-BR')
   });
-});
+  save();
+ },50);
+}
+
+function renderClientes(){
+ const busca=(document.getElementById('busca')?.value||'').toLowerCase();
+ let arr=clientes.filter(c=>{
+  const texto=(c.nome+' '+c.telefone+' '+c.cpf).toLowerCase();
+  if(busca&&!texto.includes(busca))return false;
+  if(filtro==='ativos'&&c.status!=='Ativo')return false;
+  if(filtro==='pendentes'&&c.status!=='Aguardando aprovação')return false;
+  return true;
+ });
+
+ document.getElementById('contClientes').textContent=clientes.length+' clientes';
+
+ if(!arr.length){
+  document.getElementById('listaClientes').innerHTML='<div class="empty">Nenhum cliente encontrado.</div>';
+  return;
+ }
+
+ document.getElementById('listaClientes').innerHTML=arr.map(c=>{
+  const qtd=contratos.filter(x=>x.clienteId===c.id).length;
+  return `<div class="card client">
+   <div>
+    <strong>${c.nome}</strong>
+    <div class="small">${c.telefone||'Sem telefone'}</div>
+    <div class="small">CPF: ${c.cpf||'Não informado'}</div>
+    <div class="small">${qtd} contrato(s)</div>
+    <span class="badge">${c.status}</span>
+   </div>
+   <div>
+    <button class="btn green" onclick="novoContratoCliente(${c.id})">+ Contrato</button>
+    <button class="btn dark" onclick="aprovarCliente(${c.id})">✓</button>
+   </div>
+  </div>`;
+ }).join('');
+}
+
+function aprovarCliente(id){
+ const c=clientes.find(x=>x.id===id);
+ if(c){c.status='Ativo';save()}
+}
+
+function novoContratoCliente(id){
+ abrir('contratos');
+ setTimeout(()=>{
+  document.getElementById('cCliente').value=id;
+ },50);
+}
+
+function preencherClientes(){
+ document.getElementById('cCliente').innerHTML=
+ '<option value="">Selecione o cliente</option>'+
+ clientes.filter(c=>c.status==='Ativo').map(c=>`<option value="${c.id}">${c.nome}</option>`).join('');
+}
+
+function calcularContrato(){
+ const valor=Number(document.getElementById('cValor').value||0);
+ const juros=Number(document.getElementById('cJuros').value||0);
+ const jr=valor*juros/100;
+ document.getElementById('cJurosReais').textContent=brl(jr);
+ document.getElementById('cTotal').textContent=brl(valor+jr);
+}
+
+function criarContrato(){
+ const clienteId=Number(document.getElementById('cCliente').value);
+ const valor=Number(document.getElementById('cValor').value);
+ const juros=Number(document.getElementById('cJuros').value);
+ const parcelas=Number(document.getElementById('cParcelas').value);
+ const venc=document.getElementById('cVencimento').value;
+
+ if(!clienteId||!valor||!juros||!parcelas||!venc){
+  alert('Preencha todos os campos principais.');
+  return;
+ }
+
+ const total=valor+(valor*juros/100);
+
+ contratos.push({
+  id:Date.now(),
+  clienteId,
+  valor,
+  juros,
+  total,
+  parcelas,
+  venc,
+  forma:document.getElementById('cForma').value,
+  periodo:document.getElementById('cPeriodo').value,
+  atraso:Number(document.getElementById('cAtraso').value||0),
+  pagamentos:[],
+  criado:new Date().toISOString()
+ });
+
+ alert('Contrato criado com sucesso!');
+ limparContrato();
+ save();
+}
+
+function limparContrato(){
+ document.getElementById('cValor').value='';
+ document.getElementById('cJuros').value=10;
+ document.getElementById('cParcelas').value=1;
+ document.getElementById('cVencimento').value='';
+ calcularContrato();
+}
+
+function renderContratos(){
+ const box=document.getElementById('listaContratos');
+ if(!contratos.length){box.innerHTML='<div class="empty">Nenhum contrato.</div>';return}
+ box.innerHTML=contratos.map(c=>{
+  const cli=clientes.find(x=>x.id===c.clienteId);
+  return `<div class="card">
+   <strong>${cli?.nome||'Cliente'}</strong>
+   <div class="small">Emprestado: ${brl(c.valor)}</div>
+   <div class="small">Juros: ${c.juros}% — ${brl(c.valor*c.juros/100)}</div>
+   <div class="small">Total: ${brl(c.total)}</div>
+   <div class="small">${c.parcelas} parcela(s) — ${c.periodo}</div>
+  </div>`;
+ }).join('');
+}
+
+function estaAtrasada(data){
+ return new Date(data+'T23:59:59')<new Date();
+}
+
+function renderParcelas(){
+ let html='';
+ let aberto=0,atrasado=0;
+
+ contratos.forEach(c=>{
+  const cli=clientes.find(x=>x.id===c.clienteId);
+  const valorParcela=c.total/c.parcelas;
+
+  for(let i=1;i<=c.parcelas;i++){
+   const pago=c.pagamentos?.includes(i);
+   const data=new Date(c.venc+'T12:00:00');
+   if(c.periodo==='Semanal')data.setDate(data.getDate()+(i-1)*7);
+   if(c.periodo==='Quinzenal')data.setDate(data.getDate()+(i-1)*15);
+   if(c.periodo==='Mensal')data.setMonth(data.getMonth()+(i-1));
+   const ds=data.toISOString().slice(0,10);
+
+   if(!pago){
+    aberto+=valorParcela;
+    if(estaAtrasada(ds))atrasado+=valorParcela;
+   }
+
+   html+=`<div class="card">
+    <strong>${cli?.nome||'Cliente'}</strong>
+    <div class="small">Parcela ${i}/${c.parcelas}</div>
+    <div class="small">Vencimento: ${data.toLocaleDateString('pt-BR')}</div>
+    <div class="small">Valor: ${brl(valorParcela)}</div>
+    ${pago?'<span class="badge">PAGO</span>':
+    `<button class="btn gold full" onclick="receber(${c.id},${i},${valorParcela})">RECEBER</button>`}
+   </div>`;
+  }
+ });
+
+ document.getElementById('listaParcelas').innerHTML=html||'<div class="empty">Nenhuma parcela.</div>';
+ document.getElementById('cobAberto').textContent=brl(aberto);
+ document.getElementById('cobAtrasado').textContent=brl(atrasado);
+}
+
+function receber(cid,num,valor){
+ const c=contratos.find(x=>x.id===cid);
+ if(!c)return;
+ c.pagamentos=c.pagamentos||[];
+ if(!c.pagamentos.includes(num))c.pagamentos.push(num);
+ movimentos.push({
+  id:Date.now(),tipo:'Entrada',valor,descricao:'Pagamento de parcela',data:new Date().toLocaleDateString('pt-BR')
+ });
+ alert('Pagamento registrado!');
+ save();
+}
+
+function movimentar(){
+ const valor=Number(document.getElementById('movValor').value);
+ if(!valor)return;
+ movimentos.push({
+  id:Date.now(),
+  tipo:document.getElementById('movTipo').value,
+  valor,
+  descricao:document.getElementById('movDesc').value||'Movimentação',
+  data:new Date().toLocaleDateString('pt-BR')
+ });
+ document.getElementById('movValor').value='';
+ document.getElementById('movDesc').value='';
+ save();
+}
+
+function renderFinanceiro(){
+ let ent=0,sa=0;
+ movimentos.forEach(m=>m.tipo==='Entrada'?ent+=m.valor:sa+=m.valor);
+ document.getElementById('entradas').textContent=brl(ent);
+ document.getElementById('saidas').textContent=brl(sa);
+ document.getElementById('saldo').textContent=brl(ent-sa);
+
+ document.getElementById('historico').innerHTML=
+ movimentos.slice().reverse().map(m=>`
+ <div class="card">
+  <strong>${m.tipo}</strong> — ${brl(m.valor)}
+  <div class="small">${m.descricao} · ${m.data}</div>
+ </div>`).join('')||'<div class="empty">Sem movimentações.</div>';
+}
+
+function atualizar(){
+ preencherClientes();
+ renderClientes();
+ renderContratos();
+ renderParcelas();
+ renderFinanceiro();
+
+ let capital=0,receber=0,juros=0;
+ contratos.forEach(c=>{
+  capital+=c.valor;
+  receber+=c.total;
+  juros+=c.valor*c.juros/100;
+ });
+
+ let pago=0;
+ movimentos.forEach(m=>{if(m.tipo==='Entrada')pago+=m.valor});
+
+ document.getElementById('capital').textContent=brl(capital);
+ document.getElementById('receber').textContent=brl(Math.max(0,receber-pago));
+ document.getElementById('juros').textContent=brl(juros);
+
+ let atr=0;
+ document.querySelectorAll('#listaParcelas .card').forEach(()=>{});
+ contratos.forEach(c=>{
+  const vp=c.total/c.parcelas;
+  for(let i=1;i<=c.parcelas;i++){
+   if(!(c.pagamentos||[]).includes(i)){
+    const d=new Date(c.venc+'T12:00:00');
+    if(c.periodo==='Semanal')d.setDate(d.getDate()+(i-1)*7);
+    if(c.periodo==='Quinzenal')d.setDate(d.getDate()+(i-1)*15);
+    if(c.periodo==='Mensal')d.setMonth(d.getMonth()+(i-1));
+    if(d<new Date())atr+=vp;
+   }
+  }
+ });
+ document.getElementById('atraso').textContent=brl(atr);
+ document.getElementById('proximas').innerHTML=
+ contratos.slice(0,5).map(c=>{
+  const cli=clientes.find(x=>x.id===c.clienteId);
+  return `<div class="small">• ${cli?.nome||'Cliente'} — ${brl(c.total)}</div>`;
+ }).join('')||'<div class="empty">Nenhuma cobrança cadastrada.</div>';
+}
+
+function abrirCadastroPublico(){
+ const url=location.href.split('#')[0]+'#cadastro';
+ navigator.clipboard?.writeText(url);
+ alert('Link copiado! Esta é a área de cadastro público da versão atual.');
+}
+
+function init(){
+ const u=localStorage.getItem('ownerUser');
+ const p=localStorage.getItem('ownerPass');
+ if(u&&p){
+  document.getElementById('loginUser').value=u;
+ }
+ atualizar();
+}
+
+init();
 </script>
 
 </body>
